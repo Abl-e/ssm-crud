@@ -34,7 +34,7 @@ public class EmployeeController {
         //使用pageInfo包装分页结果，只需要将pageInfo交给页面就行
         //封装的详细的得分也信息，包括查询出来的数据,传入连续显示的页数
         PageInfo pageInfo = new PageInfo(employees,5);
-        return Message.success().add("pageInfo",pageInfo);
+        return Message.success("分页查询成功").add("pageInfo",pageInfo);
     }
 
     //@RequestMapping("/emps")

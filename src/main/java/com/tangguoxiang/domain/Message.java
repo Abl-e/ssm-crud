@@ -11,16 +11,16 @@ public class Message {
     private String msg;
     private Map<String,Object> result = new HashMap<>();
 
-    public static Message success(){
+    public static Message success(String message){
         Message msg = new Message();
         msg.setCode(200);
-        msg.setMsg("处理成功");
+        msg.setMsg(message);
         return msg;
     }
-    public static Message fail(){
+    public static Message fail(String message){
         Message msg = new Message();
         msg.setCode(505);
-        msg.setMsg("处理失败");
+        msg.setMsg(message);
         return msg;
     }
 
