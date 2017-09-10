@@ -4,7 +4,6 @@ import com.tangguoxiang.dao.EmployeeMapper;
 import com.tangguoxiang.domain.Employee;
 import com.tangguoxiang.domain.EmployeeExample;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -46,5 +45,14 @@ public class EmployeeService {
         criteria.andEmpNameEqualTo(empName);
         long count = employeeMapper.countByExample(employeeExample);
         return count==0 ;
+    }
+
+    /**
+     * 根据id查询员工
+     * @param id 主键id
+     * @return Employee
+     */
+    public Employee getEmp(Integer id) {
+        return employeeMapper.selectByPrimaryKey(id);
     }
 }

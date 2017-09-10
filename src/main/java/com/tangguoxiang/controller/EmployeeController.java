@@ -8,10 +8,7 @@ import com.tangguoxiang.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -38,7 +35,7 @@ public class EmployeeController {
             for(FieldError e:errors){
                 map.put(e.getField(),e.getDefaultMessage());
             }
-            return Message.fail("").add("error",map);
+            return Message.fail("员工保存失败").add("error",map);
         }else{
             employeeService.save(employee);
             return Message.success("员工信息保存成功");
@@ -46,6 +43,11 @@ public class EmployeeController {
 
     }
 
+    /**
+     * 后台校验empName 判断员工名是否存在
+     * @param empName 员工名
+     * @return Message
+     */
     @RequestMapping(value = "/checkEmpName")
     @ResponseBody
     public Message checkEnpName(@RequestParam(value = "empName")String empName){
@@ -61,6 +63,17 @@ public class EmployeeController {
         }
     }
 
+    /**
+     *
+     * @param id 员工id
+     * @return Message
+     */
+    @RequestMapping(value = "/emp/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Message getEmp(@PathVariable("id") Integer id){
+        Employee employee = employeeService.getEmp(id);
+        return Message.success("查询成功").add("emp",employee);
+    }
     /**
      *
      * @param page 页码
